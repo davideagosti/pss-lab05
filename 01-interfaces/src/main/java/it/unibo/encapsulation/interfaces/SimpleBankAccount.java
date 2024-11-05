@@ -42,10 +42,12 @@ public class SimpleBankAccount implements BankAccount {
         return this.balance;
     }
 
+    @Override
     public int getTransactionsCount() {
         return this.transactions;
     }
 
+    @Override
     public void deposit(final int id, final double amount) {
         /*
          * Incrementa il numero di transazioni e aggiunge amount al totale del
@@ -58,6 +60,7 @@ public class SimpleBankAccount implements BankAccount {
         }
     }
 
+    @Override
     public void withdraw(final int id, final double amount) {
         /*
          * Incrementa il numero di transazioni e rimuove amount al totale del
@@ -70,6 +73,7 @@ public class SimpleBankAccount implements BankAccount {
         }
     }
 
+    @Override
     public void depositFromATM(final int id, final double amount) {
         /*
          * Incrementa il numero di transazioni e aggiunge amount al totale del
@@ -83,6 +87,7 @@ public class SimpleBankAccount implements BankAccount {
         }
     }
 
+    @Override
     public void withdrawFromATM(final int id, final double amount) {
         /*
          * Incrementa il numero di transazioni e rimuove amount + le spese
@@ -97,15 +102,18 @@ public class SimpleBankAccount implements BankAccount {
         }
     }
 
+    // Metodo richiesto dall'interfaccia, ma senza spese di gestione per SimpleBankAccount
+
+    @Override
     public void chargeManagementFees(final int id) {
         /*
          * Riduce il bilancio del conto di un ammontare pari alle spese di gestione
          */
-        if (this.id == id) {
-            double managementFees = 5 * (this.transactions % 2 == 0 ? this.transactions : this.transactions + 1);
-            this.balance -= managementFees;
-            this.transactions++;
+        // if (this.id == id) {
+        //     double managementFees = 5 * (this.transactions % 2 == 0 ? this.transactions : this.transactions + 1);
+        //     this.balance -= managementFees;
+        //     this.transactions++;
             
-        }
+        // }
     }
 }
