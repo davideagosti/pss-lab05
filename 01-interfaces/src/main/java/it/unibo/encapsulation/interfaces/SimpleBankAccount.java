@@ -7,15 +7,24 @@ public class SimpleBankAccount implements BankAccount {
      * - double balance: ammontare del conto
      * - int transactions: numero delle operazioni effettuate
      * - static double ATM_TRANSACTION_FEE = 1: costo delle operazioni via ATM
-     */
+     */ 
+
+    private double balance;
+
+    private int transactions;
+
+    private static final double ATM_TRANSACTION_FEE = 1;
+
     private final int id;
 
     /*
      * Creare un costruttore pubblico che prenda in ingresso un intero (ossia l'id
      * dell'utente) ed un double (ossia, l'ammontare iniziale del conto corrente).
      */
-    public SimpleBankAccount(final int id, final double balance) {
+    public SimpleBankAccount(final int id, final double initialBalance) {
         this.id = id;
+        this.balance = initialBalance;
+        this.transactions = 0;
     }
 
     /*
@@ -28,12 +37,13 @@ public class SimpleBankAccount implements BankAccount {
         return this.id;
     }
 
+    @Override
     public double getBalance() {
-        return 0.0;
+        return this.balance;
     }
 
     public int getTransactionsCount() {
-        return 0;
+        return this.transactions;
     }
 
     public void deposit(final int id, final double amount) {
@@ -42,6 +52,10 @@ public class SimpleBankAccount implements BankAccount {
          * conto Nota: il deposito va a buon fine solo se l'id utente
          * corrisponde
          */
+        if (this.id == id) {
+            this.transactions++;
+            this.balance += amount;
+        }
     }
 
     public void withdraw(final int id, final double amount) {
@@ -50,6 +64,10 @@ public class SimpleBankAccount implements BankAccount {
          * conto. Note: - Il conto puo' andare in rosso (ammontare negativo) -
          * Il prelievo va a buon fine solo se l'id utente corrisponde
          */
+        if (this.id == id) {
+            this.transactions++;
+            this.balance -= amount;
+        }
     }
 
     public void depositFromATM(final int id, final double amount) {
@@ -59,6 +77,10 @@ public class SimpleBankAccount implements BankAccount {
          * all'uso dell'ATM (bancomat) Nota: il deposito va a buon fine solo se
          * l'id utente corrisponde
          */
+        if (this.id == id) {
+            this.transactions++;
+            this.balance += (amount - ATM_TRANSACTION_FEE);
+        }
     }
 
     public void withdrawFromATM(final int id, final double amount) {
@@ -69,11 +91,21 @@ public class SimpleBankAccount implements BankAccount {
          * negativo) - Il prelievo va a buon fine solo se l'id utente
          * corrisponde
          */
+        if (this.id == id) {
+            this.transactions++;
+            this.balance += (amount + ATM_TRANSACTION_FEE);
+        }
     }
 
     public void chargeManagementFees(final int id) {
         /*
          * Riduce il bilancio del conto di un ammontare pari alle spese di gestione
          */
+        if (this.id == id) {
+            double managementFees = 5 * (this.transactions % 2 == 0 ? this.transactions : this.transactions + 1);
+            this.balance -= managementFees;
+            this.transactions++;
+            
+        }
     }
 }
