@@ -14,6 +14,7 @@ public class TestBankAccount {
          * 2) Creare l' AccountHolder relativo a Alex Bianchi con id 2
          */
         AccountHolder bianchi = new AccountHolder("Alex", "Bianchi",  2);
+        
         /*
          * 3) Dichiarare due variabili di tipo BankAccount ed inizializzarle,
          * rispettivamente, con oggetti di tipo SimpleBankAccount per il conto di
@@ -22,6 +23,7 @@ public class TestBankAccount {
          */
         BankAccount rossiAccount = new SimpleBankAccount(rossi.getUserID(), 0);
         BankAccount bianchiAccount = new StrictBankAccount(bianchi.getUserID(), 0);
+        
         /*
          * 4) Prima riflessione: perché è stato possibile fare la new di due classi
          * diverse in variabili dello stesso tipo?
@@ -32,16 +34,19 @@ public class TestBankAccount {
          */
         rossiAccount.deposit(rossi.getUserID(), 10000);
         bianchiAccount.deposit(bianchi.getUserID(), 10000);
+        
         /*
          * 6) Prelevare €15000$ da entrambi i conti
          */
         rossiAccount.withdraw(rossi.getUserID(), 15000);
         bianchiAccount.withdraw(bianchi.getUserID(), 15000);
+        
         /*
          * 7) Stampare in stdout l'ammontare corrente
          */
         System.out.println("Saldo conto Rossi: " + rossiAccount.getBalance());
         System.out.println("Saldo conto Bianchi: " + bianchiAccount.getBalance());
+        
         /*
          * 8) Qual è il risultato e perché?
          * Il conto di Rossi va in negativo, mentre il conto di Bianchi rimane invariato

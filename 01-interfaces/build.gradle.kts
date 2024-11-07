@@ -4,6 +4,8 @@ plugins {
 }
 
 application {
+    mainClass.set("it.unibo.encapsulation.interfaces.TestBankAccount")
     mainClass.set("it.unibo.encapsulation.interfaces.TestSimpleBankAccount")
+
 }
 
